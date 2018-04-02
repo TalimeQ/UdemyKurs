@@ -22,7 +22,8 @@ void UPositionReport::BeginPlay()
 
 	// ...
 	FString  OwnerName = this->GetOwner()->GetName();
-	UE_LOG(LogTemp, Error, TEXT("%s REPORTING FOR DUTY!"),*OwnerName);
+	FString ObjectPos = this->GetOwner()->GetActorLocation().ToString();
+	UE_LOG(LogTemp, Error, TEXT("%s REPORTING FOR DUTY AT %s!"),*OwnerName,*ObjectPos);
 	
 }
 
