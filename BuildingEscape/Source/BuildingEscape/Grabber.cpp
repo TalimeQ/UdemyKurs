@@ -35,6 +35,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	//if physics handel attached
+	if (!PhysicsHandle) { return; }
 	if (PhysicsHandle->GrabbedComponent)
 	{
 
@@ -54,6 +55,7 @@ void UGrabber::Grab()
 		// try and reach any actors with physics body collision channel set
 		// if we hit something then attach a physics handle
 		//TODO attach handle
+	if (!PhysicsHandle) { return; }
 	if (ActorHit) {
 		PhysicsHandle->GrabComponent(ComponentToGrab,
 			NAME_None, // No bones needed
@@ -66,11 +68,13 @@ void UGrabber::Release()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Release is pressed"))
 		// release physcis handle
+		if (!PhysicsHandle) { return; }
 		PhysicsHandle->ReleaseComponent();
 }
 void UGrabber::FindPhysicsComponent()
 {
 	/// look for attached physics handle
+	if (!PhysicsHandle) { return; }
 	PhysicsHandle = GetOwner()->FindComponentByClass<UPhysicsHandleComponent>();
 	if (PhysicsHandle)
 	{
